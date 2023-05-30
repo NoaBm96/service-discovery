@@ -11,25 +11,6 @@ resource "aws_instance" "consul_server" {
     Name = "Consul-host-${count.index + 1}"
     consul_server = "true"
   }
-  # connection {
-  #   type                = "ssh"
-  #   host                = "${self.private_ip}"
-  #   user                = "ubuntu"
-  #   private_key         = file(var.private_key_path)
-  #   bastion_host        =  aws_instance.bastion_host.public_ip
-  #   bastion_user        = "ubuntu"
-  #   bastion_private_key = file(var.private_key_path)
-  # }
-  # provisioner "file" {
-  #   source      = "../scripts"
-  #   destination = "/home/ubuntu"  
-  # }
-  #  provisioner "remote-exec" {
-  #   inline = [
-  #     "chmod u+x scripts/consul-agent.sh",
-  #     "sudo bash ./scripts/consul-agent.sh"
-  #   ]
-  #  } 
 }
 
 resource "aws_instance" "consul_webserver" {
@@ -45,28 +26,4 @@ resource "aws_instance" "consul_webserver" {
   tags = {
     Name = "Consul-agent-${count.index + 1}"
   }
-  # connection {   
-  #     host                = aws_instance.consul_server.private_ip
-  #     user                = "ubuntu"
-  #     private_key         = file(var.private_key_path)     
-  #     type                = "ssh"
-  #     bastion_host        =  aws_instance.bastion_host.public_ip
-  #     bastion_user        = "ubuntu"
-  #     bastion_private_key = file(var.private_key_path) 
-  #   } 
-
-  # provisioner "file" {
-  #   source      = "../scripts/consul-server.sh"
-  #   destination = "/home/ubuntu/consul-server.sh"  
-  # }
-  #  provisioner "remote-exec" {
-  #   inline = [
-  #     "chmod u+x consul-server.sh",
-  #     "sudo bash ./consul-server.sh"
-  #   ]
-  #  }
-  # tags = {
-  #   Name = "consul-server"
-  #   consul_server = "true"
-  # }
 }

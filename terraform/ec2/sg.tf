@@ -33,6 +33,33 @@
     cidr_blocks = ["0.0.0.0/0"]
     description = "Allow consul UI access from the world"
    }
+
+   ingress { 
+   	from_port       =  8600
+    to_port         =  8600
+    protocol        = "tcp" 
+    #security_groups = [aws_security_group.consul-lb.id]
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow consul UI access from the world"
+   }
+
+   ingress { 
+   	from_port       =  8300
+    to_port         =  8300
+    protocol        = "tcp" 
+    #security_groups = [aws_security_group.consul-lb.id]
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow consul UI access from the world"
+   }
+   
+   ingress { 
+   	from_port       =  8301
+    to_port         =  8301
+    protocol        = "tcp" 
+    #security_groups = [aws_security_group.consul-lb.id]
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow consul UI access from the world"
+   }
   egress {
     from_port       = 0
     to_port         = 0
@@ -41,27 +68,3 @@
     description     = "Allow all outside security group"
   }
 }
-
-# resource "aws_security_group" "consul-lb" { 
-#  	name   = "consul-alb-security-group" 
-#   vpc_id = module.vpc_module.vpc_id 
-    
-#   # Allow inbound HTTP requests
-#   ingress { 
-#     protocol    = "tcp" 
-#     from_port   = 8500 
-#     to_port     = 8500 
-#     cidr_blocks = ["0.0.0.0/0"] 
-#     } 
-#     # Allow all outbound requests
-#     egress { 
-#      	from_port   = 0 
-#       to_port     = 0 
-#       protocol    = "-1" 
-#       cidr_blocks = ["0.0.0.0/0"] 
-#      } 
-     
-#      tags = { 
-#      	Name = "consul-lb-sg" 
-#       } 
-#  } 
